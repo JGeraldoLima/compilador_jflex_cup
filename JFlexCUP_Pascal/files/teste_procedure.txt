@@ -1,0 +1,29 @@
+program exString;
+
+label 10, 11;
+
+procedure findMin; 
+begin
+   if x < y then
+      m:= x
+   else
+      m:= y;
+   if z < m then
+      m:= z;
+end;
+
+procedure findMin; 
+begin
+   if x < y then
+      m:= x
+   else
+      m:= y;
+   if z < m then
+      m:= z;
+end;
+
+begin
+
+
+
+end.

@@ -1,0 +1,55 @@
+import java_cup.runtime.*;
+
+/*Este codigo foi reusado. Ele serve para nos mostrar aonde ocorreu um erro, ao ler um arquivo de entrada.*/
+parser code {:
+    
+    public void report_error(String message, Object info) {
+   
+        StringBuffer m = new StringBuffer("Error");
+   
+        if (info instanceof java_cup.runtime.Symbol) {
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+            if (s.left >= 0) {
+                /* Add to the end of the StringBuffer error message
+                   the line number of the error in the input. */
+                m.append(" in line "+(s.left+1));   
+                /* Check if the column number in the input is greater
+                   or equal to zero. */
+                if (s.right >= 0)                    
+                    /* Add to the end of the StringBuffer error message
+                       the column number of the error in the input. */
+                    m.append(", column "+(s.right+1));
+            }
+        }
+   
+	
+        m.append(" : "+message);
+        System.err.println(m);
+    }
+
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+        System.exit(1);
+    }
+:};
+
+/*Aqui estao listado todos os simbolos terminais da nossa gramatica*/
+terminal LPAREN, RPAREN, MINUS, PLUS, DIV, TIMES, DIGIT, NUMBER, LETTER, STRING, COLON, 
+SEMICOLON, COMMA, DOT, PROGRAM, IDENTIFIER, IDENTIFIERLIST, BEGIN, END;
+
+/*Aqui estao todos os simbolos nao terminais da gramatica, a partir de <non terminal>*/
+non terminal program, program_heading, block, identifier, identifier_list, declaration_part, statement_part,
+statement_sequence, sign, char, letter, string, digit, number;
+
+/*Aqui estao as regras de producao*/
+
+program ::= program_heading block DOT;
+program_heading ::= PROGRAM identifier LPAREN identifier_list RPAREN SEMICOLON;
+block ::= declaration_part statement_part;
+declaration_part ::= label;
+statement_part ::= BEGIN statement_sequence END;
+statement_sequence ::= ;
+
+identifier ::= letter {letter | digit};
+identifier_list ::= identifier {COLON identifier};
+letter ::= LETTER;

@@ -1,0 +1,36 @@
+program exString;
+
+label 10, 53, 71;
+
+const
+   name = 'Victor';
+   integer = 100;
+   real = 345.76;
+   
+type Pointer = ^pointer;
+   
+var
+   greetings: string;
+   name1: packed array [1..10] of char;
+   organisation: string;
+   message: pchar;
+   Num1, Num2, Sum : Integer;
+	
+begin
+	10:Clrscr;
+	Write('Input number 1:'); 
+	Readln(Num1);
+	Writeln('Input number 2:');
+	Readln(Num2);
+	Sum := Num1 + Num2; {addition} 
+	Writeln(Sum);
+	Readln;
+	greetings := 'Hello ';
+	message := 'Good Day!';
+	writeln('Please Enter your Name');
+	readln(name);
+	writeln('Please Enter the name of your Organisation');
+	readln(organisation);
+	writeln(greetings, name, ' from ', organisation);
+	writeln(message); 
+end.
